@@ -10,7 +10,7 @@ app.use(cors());
 app.use("/api/v1", productRoutes);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
+  res.send("Hello Worrld!");
 });
 
 export default app;
