@@ -6,12 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const products_route_1 = require("./app/modules/products/products.route");
+const cart_route_1 = require("./app/modules/cart/cart.route");
+const user_route_1 = require("./app/modules/user/user.route");
 const app = (0, express_1.default)();
 const port = 3000;
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
-app.use("/api/v1", products_route_1.productRoutes);
+app.use("/api/v1/product", products_route_1.productRoutes);
+app.use("/api/v1/cart", cart_route_1.cartRoutes);
+app.use("/api/v1/auth", user_route_1.userRoutes);
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.send("Hello Worrld!");
 });
 exports.default = app;
