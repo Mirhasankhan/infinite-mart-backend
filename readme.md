@@ -48,9 +48,9 @@ To run this project locally, follow these steps:
 
 User Routes:
 
-- **POST**:/api/users/register: Register a new user
-  POST /api/users/login: Authenticate a user and get a token
-  GET /api/users/profile: Get user profile (protected)
+- **POST /api/users/register:** : Register a new user
+- **POST /api/users/login:** Authenticate a user and get a token
+- **GET /api/users/profile:** Get user profile (protected)
   Product Routes:
 
 GET /api/products: Get all products
