@@ -1,4 +1,4 @@
-# Online Shopping Website Backend
+# Infinite Mart Website Backend
 
 ## Description
 
@@ -42,15 +42,16 @@ To run this project locally, follow these steps:
 
    npm start
 
-   API Endpoints
+   ## API Endpoints
+
    Here are some of the key API endpoints available in this backend:
 
 User Routes:
 
-POST /api/users/register: Register a new user
-POST /api/users/login: Authenticate a user and get a token
-GET /api/users/profile: Get user profile (protected)
-Product Routes:
+- **POST**:/api/users/register: Register a new user
+  POST /api/users/login: Authenticate a user and get a token
+  GET /api/users/profile: Get user profile (protected)
+  Product Routes:
 
 GET /api/products: Get all products
 GET /api/products/:id: Get a product by ID
