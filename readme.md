@@ -53,7 +53,7 @@ User Routes:
 - **GET /api/users/profile:** Get user profile (protected)
   Product Routes:
 
-GET /api/products: Get all products
+GET /api/products: Get all product
 GET /api/products/:id: Get a product by ID
 POST /api/products: Create a new product (protected)
 PUT /api/products/:id: Update a product by ID (protected)

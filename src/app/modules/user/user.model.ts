@@ -5,7 +5,7 @@ const userSchema = new Schema<TUser>({
   name: { type: String },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { type: String },
+  isSeller: { type: Boolean },
 });
 
 export const userModel = model<TUser>("user", userSchema);

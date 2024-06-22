@@ -3,21 +3,17 @@ export interface Image {
   imageUrl: string;
 }
 
-export interface Review {
-  rating: number;
-  review: string;
-}
-
-export type TProduct = {
+export type TPurchase = {
   productName: string;
+  cartId: string;
+  productId: string;
   email: string;
+  userEmail: string;
   image: Image;
-  quantity: number;
-  content: string;
+  cartQuantity: number;
   seller: string;
   price: number;
+  totalCost: number;
   category: string;
   subCategory: string;
-  flashSale: boolean;
-  reviews: Review[];
 };

@@ -21,7 +21,8 @@ const createProduct = async (req: Request, res: Response) => {
 
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const result = await productDB.getAllProductsFromDB();
+    const email = req.query.email;
+    const result = await productDB.getAllProductsFromDB(email as string);
     res.status(200).json({
       success: true,
       message: "Products retrieved successfully",
@@ -29,10 +30,78 @@ const getAllProducts = async (req: Request, res: Response) => {
     });
   } catch (err) {
     console.log(err);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while retrieving products",
+    });
+  }
+};
+
+const addReview = async (req: Request, res: Response) => {
+  const { productId } = req.params;
+  const { username, rating, review } = req.body;
+
+  if (!productId || !rating || !review) {
+    return res
+      .status(400)
+      .json({ error: "Product ID, rating, and review are required." });
+  }
+
+  if (typeof rating !== "number" || typeof review !== "string") {
+    return res
+      .status(400)
+      .json({ error: "Invalid data types for rating or review." });
+  }
+
+  if (rating < 1 || rating > 5) {
+    return res.status(400).json({ error: "Rating must be between 1 and 5." });
+  }
+
+  try {
+    const updatedProduct = await productDB.updateProductFromDB(productId, {
+      username,
+      rating,
+      review,
+    });
+    if (!updatedProduct) {
+      return res.status(404).json({ error: "Product not found." });
+    }
+    return res.status(200).json(updatedProduct);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ error: "An error occurred while updating the product." });
+  }
+};
+
+const decreaseQuantity = async (req: Request, res: Response) => {
+  const { productId } = req.params;
+  const { decreaseBy } = req.body;
+
+  if (!productId || !decreaseBy) {
+    return res
+      .status(400)
+      .json({ error: "Product ID and decrease amount are required." });
+  }
+
+  if (typeof decreaseBy !== "number" || decreaseBy <= 0) {
+    return res.status(400).json({ error: "Invalid decrease amount." });
+  }
+
+  try {
+    const updatedProduct = await productDB.decreaseProductQuantity(
+      productId,
+      decreaseBy
+    );
+    return res.status(200).json(updatedProduct);
+  } catch (error) {
+    return res.status(500).json({ error: "error.message" });
   }
 };
 
 export const productController = {
   createProduct,
   getAllProducts,
+  addReview,
+  decreaseQuantity,
 };

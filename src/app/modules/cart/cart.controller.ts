@@ -38,7 +38,50 @@ const getFullCart = async (req: Request, res: Response) => {
   }
 };
 
+const updateCartQuantity = async (req: Request, res: Response) => {
+  try {
+    const { cartId, newQuantity } = req.body;
+
+    if (!cartId || !newQuantity || newQuantity <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid cart ID or quantity",
+      });
+    }
+
+    const result = await cartDb.updateCartQuantity(cartId, newQuantity);
+
+    res.status(200).json({
+      success: true,
+      message: "Cart quantity updated successfully",
+      data: result,
+    });
+  } catch (err) {
+    console.error("Error updating cart quantity:", err);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while updating cart quantity",
+    });
+  }
+};
+
+const deleteCart = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const result = await cartDb.deleteFromCart(id);
+    res.status(200).json({
+      success: true,
+      message: `${id} deleted successfully`,
+      data: result,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const cartController = {
   addToCart,
   getFullCart,
+  updateCartQuantity,
+  deleteCart,
 };

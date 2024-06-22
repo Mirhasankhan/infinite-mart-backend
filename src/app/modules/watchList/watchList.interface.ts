@@ -1,16 +1,12 @@
 import { Image } from "../products/products.interface";
 
-export type TCart = {
+export type TWatchList = {
   productName: string;
   seller: string;
-  email: string;
-  userEmail: string;
+  buyerEmail: string;
   image: Image;
-  price: number;
-  cartQuantity: number;
-  totalCost: number;
+  price: string;
   category: string;
   subCategory: string;
   flashSale: boolean;
-  productId: string;
 };
