@@ -1,4 +1,4 @@
-import { TUser } from "./user.interface";
+import { Address, TUser } from "./user.interface";
 import { userModel } from "./user.model";
 
 const createAccountToDB = async (user: TUser) => {
@@ -19,7 +19,34 @@ const LoginAccount = async (email: any, password: string) => {
   return user;
 };
 
+const updateUserFromDB = async (_id: string, updateData: any) => {
+  const { city, province, street, phone, image } = updateData;
+
+  const result = await userModel.findByIdAndUpdate(
+    _id,
+    {
+      $set: {
+        "address.0.city": city,
+        "address.0.province": province,
+        "address.0.street": street,
+        phone: phone,
+        image: image,
+      },
+    },
+    { new: true }
+  );
+
+  return result;
+};
+
+const getCurrentUser = async (email: string) => {
+  const result = await userModel.findOne({ email });
+  return result;
+};
+
 export const userDb = {
   createAccountToDB,
   LoginAccount,
+  updateUserFromDB,
+  getCurrentUser,
 };

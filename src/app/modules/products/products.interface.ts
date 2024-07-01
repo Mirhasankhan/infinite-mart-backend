@@ -19,5 +19,6 @@ export type TProduct = {
   category: string;
   subCategory: string;
   flashSale: boolean;
+  sold?: number;
   reviews: Review[];
 };

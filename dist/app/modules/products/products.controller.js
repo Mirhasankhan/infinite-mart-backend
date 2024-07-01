@@ -46,6 +46,24 @@ const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
     }
 });
+const getSearchedProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const search = req.query.search;
+        const result = yield products_service_1.productDB.getProductsBySearch(search);
+        res.status(200).json({
+            success: true,
+            message: "Products retrieved successfully",
+            data: result,
+        });
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message: "An error occurred while retrieving products",
+        });
+    }
+});
 const addReview = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { productId } = req.params;
     const { username, rating, review } = req.body;
@@ -103,4 +121,5 @@ exports.productController = {
     getAllProducts,
     addReview,
     decreaseQuantity,
+    getSearchedProducts,
 };

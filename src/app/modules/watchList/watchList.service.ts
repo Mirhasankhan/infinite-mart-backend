@@ -8,7 +8,7 @@ const addToWatchList = async (list: TWatchList) => {
 
 const getAllWatchListFromDB = async (email?: string) => {
   if (email) {
-    return await watchListModel.find({ buyerEmail: email });
+    return await watchListModel.find({ userEmail: email });
   }
 };
 

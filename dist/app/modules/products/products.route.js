@@ -9,6 +9,7 @@ const products_controller_1 = require("./products.controller");
 const router = express_1.default.Router();
 router.post("/create-product", products_controller_1.productController.createProduct);
 router.get("/allProducts", products_controller_1.productController.getAllProducts);
+router.get("/searchedProducts", products_controller_1.productController.getSearchedProducts);
 router.patch("/:productId/reviews", products_controller_1.productController.addReview);
 router.patch("/:productId/quantity", products_controller_1.productController.decreaseQuantity);
 exports.productRoutes = router;

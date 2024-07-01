@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import { purchaseDB } from "./purchase.service";
 import { cartDb } from "../cart/cart.service";
 import { productDB } from "../products/products.service";
+import config from "../../config";
+
+const stripe = require("stripe")(config.payment_secret);
 
 const purchaseProduct = async (req: Request, res: Response) => {
   try {
@@ -53,7 +56,7 @@ const purchaseProduct = async (req: Request, res: Response) => {
 
 const getAllPurchase = async (req: Request, res: Response) => {
   try {
-    const email = req.query.userEmail;
+    const email = req.query.email;
     const result = await purchaseDB.getAllPurchedFromDB(email as string);
     res.status(200).json({
       success: true,
@@ -69,7 +72,25 @@ const getAllPurchase = async (req: Request, res: Response) => {
   }
 };
 
+const createPaymentIntent = async (req: Request, res: Response) => {
+  try {
+    const { price } = req.body;
+    const amount = price * 100;
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amount,
+      currency: "usd",
+      payment_method_types: ["card"],
+    });
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  } catch (error: any) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
 export const purchaseController = {
   purchaseProduct,
   getAllPurchase,
+  createPaymentIntent,
 };

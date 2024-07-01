@@ -11,6 +11,18 @@ const getAllProductsFromDB = async (email: string) => {
   const result = await productModel.find(query);
   return result;
 };
+
+const getProductsBySearch = async (search: string) => {
+  if (!search) {
+    return [];
+  }
+
+  const query = { productName: { $regex: search, $options: "i" } };
+
+  const result = await productModel.find(query);
+  return result;
+};
+
 const getSingleProductFromDB = async (_id: string) => {
   const result = await productModel.findOne({ _id });
   return result;
@@ -58,7 +70,7 @@ const decreaseProductQuantity = async (_id: string, decreaseBy: number) => {
 const updateProductOnSale = async (_id: string, quantity: number) => {
   const result = await productModel.findByIdAndUpdate(
     _id,
-    { $inc: { quantity: -quantity } },
+    { $inc: { quantity: -quantity, sold: quantity } },
     { new: true }
   );
   return result;
@@ -71,4 +83,5 @@ export const productDB = {
   updateProductFromDB,
   decreaseProductQuantity,
   updateProductOnSale,
+  getProductsBySearch,
 };

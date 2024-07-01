@@ -38,7 +38,22 @@ const getAllWatchList = async (req: Request, res: Response) => {
   }
 };
 
+const deleteWishlist = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const result = await watchListDB.deleteWatchFromDb(id);
+    res.status(200).json({
+      success: true,
+      message: `${id} deleted successfully`,
+      data: result,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const watchListController = {
   addToWatchList,
   getAllWatchList,
+  deleteWishlist,
 };

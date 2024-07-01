@@ -37,6 +37,25 @@ const getAllProducts = async (req: Request, res: Response) => {
   }
 };
 
+const getSearchedProducts = async (req: Request, res: Response) => {
+  try {
+    const search = req.query.search as string;
+    const result = await productDB.getProductsBySearch(search);
+
+    res.status(200).json({
+      success: true,
+      message: "Products retrieved successfully",
+      data: result,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while retrieving products",
+    });
+  }
+};
+
 const addReview = async (req: Request, res: Response) => {
   const { productId } = req.params;
   const { username, rating, review } = req.body;
@@ -104,4 +123,5 @@ export const productController = {
   getAllProducts,
   addReview,
   decreaseQuantity,
+  getSearchedProducts,
 };

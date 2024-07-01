@@ -24,6 +24,7 @@ const productSchema = new Schema<TProduct>({
   seller: { type: String, required: true },
   content: { type: String, required: true },
   quantity: { type: Number, required: true },
+  sold: { type: Number },
   image: {
     imageUrl: { type: String, required: true },
   },

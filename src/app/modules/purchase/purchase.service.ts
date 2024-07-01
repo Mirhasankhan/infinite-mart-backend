@@ -7,7 +7,7 @@ const createPurchaseIntoDB = async (products: TPurchase[]) => {
 };
 
 const getAllPurchedFromDB = async (email: string) => {
-  const query = email ? { email: email } : {};
+  const query = email ? { userEmail: email } : {};
   const result = await purchaseModel.find(query);
   return result;
 };

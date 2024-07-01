@@ -17,6 +17,7 @@ const purchaseSchema = new Schema<TPurchase>({
   subCategory: { type: String, required: true },
   price: { type: Number, required: true },
   totalCost: { type: Number, required: true },
+  date: { type: String, required: true },
 });
 
 export const purchaseModel = model<TPurchase>("Purchase", purchaseSchema);

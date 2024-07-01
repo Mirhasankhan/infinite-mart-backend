@@ -20,6 +20,14 @@ const getAllProductsFromDB = (email) => __awaiter(void 0, void 0, void 0, functi
     const result = yield products_model_1.productModel.find(query);
     return result;
 });
+const getProductsBySearch = (search) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!search) {
+        return [];
+    }
+    const query = { productName: { $regex: search, $options: "i" } };
+    const result = yield products_model_1.productModel.find(query);
+    return result;
+});
 const getSingleProductFromDB = (_id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield products_model_1.productModel.findOne({ _id });
     return result;
@@ -47,7 +55,7 @@ const decreaseProductQuantity = (_id, decreaseBy) => __awaiter(void 0, void 0, v
     return result;
 });
 const updateProductOnSale = (_id, quantity) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield products_model_1.productModel.findByIdAndUpdate(_id, { $inc: { quantity: -quantity } }, { new: true });
+    const result = yield products_model_1.productModel.findByIdAndUpdate(_id, { $inc: { quantity: -quantity, sold: quantity } }, { new: true });
     return result;
 });
 exports.productDB = {
@@ -57,4 +65,5 @@ exports.productDB = {
     updateProductFromDB,
     decreaseProductQuantity,
     updateProductOnSale,
+    getProductsBySearch,
 };

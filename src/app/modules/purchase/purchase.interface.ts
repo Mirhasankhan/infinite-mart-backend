@@ -16,4 +16,5 @@ export type TPurchase = {
   totalCost: number;
   category: string;
   subCategory: string;
+  date: string;
 };
