@@ -116,10 +116,26 @@ const decreaseQuantity = (req, res) => __awaiter(void 0, void 0, void 0, functio
         return res.status(500).json({ error: "error.message" });
     }
 });
+const updateFlashSale = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = req.body;
+    try {
+        const result = yield products_service_1.productDB.updateProductFlashSale(data._id, data.discountPercentage);
+        res.status(200).json({
+            success: true,
+            message: "Product Added To Flash Sale",
+            data: result,
+        });
+    }
+    catch (error) {
+        console.error("Error updating user:", error);
+        throw error;
+    }
+});
 exports.productController = {
     createProduct,
     getAllProducts,
     addReview,
     decreaseQuantity,
     getSearchedProducts,
+    updateFlashSale,
 };

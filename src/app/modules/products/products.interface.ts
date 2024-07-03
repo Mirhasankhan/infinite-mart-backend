@@ -20,5 +20,6 @@ export type TProduct = {
   subCategory: string;
   flashSale: boolean;
   sold?: number;
+  discountPercentage?: number;
   reviews: Review[];
 };

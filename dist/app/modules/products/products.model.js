@@ -24,6 +24,7 @@ const productSchema = new mongoose_1.Schema({
     content: { type: String, required: true },
     quantity: { type: Number, required: true },
     sold: { type: Number },
+    discountPercentage: { type: Number },
     image: {
         imageUrl: { type: String, required: true },
     },

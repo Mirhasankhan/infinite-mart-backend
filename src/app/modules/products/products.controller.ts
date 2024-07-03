@@ -118,10 +118,30 @@ const decreaseQuantity = async (req: Request, res: Response) => {
   }
 };
 
+const updateFlashSale = async (req: Request, res: Response) => {
+  const data = req.body;
+  try {
+    const result = await productDB.updateProductFlashSale(
+      data._id,
+      data.discountPercentage
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Product Added To Flash Sale",
+      data: result,
+    });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    throw error;
+  }
+};
+
 export const productController = {
   createProduct,
   getAllProducts,
   addReview,
   decreaseQuantity,
   getSearchedProducts,
+  updateFlashSale,
 };

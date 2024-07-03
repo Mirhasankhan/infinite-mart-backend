@@ -23,10 +23,20 @@ const getProductsBySearch = async (search: string) => {
   return result;
 };
 
-const getSingleProductFromDB = async (_id: string) => {
-  const result = await productModel.findOne({ _id });
+const updateProductFlashSale = async (
+  _id: string,
+  discountPercentage: number
+) => {
+  const result = await productModel.findByIdAndUpdate(
+    _id,
+    {
+      $set: { flashSale: true, discountPercentage: discountPercentage },
+    },
+    { new: true }
+  );
   return result;
 };
+
 const deleteProductFromDb = async (_id: string) => {
   const result = await productModel.deleteOne({ _id });
   return result;
@@ -84,4 +94,5 @@ export const productDB = {
   decreaseProductQuantity,
   updateProductOnSale,
   getProductsBySearch,
+  updateProductFlashSale,
 };

@@ -12,4 +12,5 @@ router.get("/allProducts", products_controller_1.productController.getAllProduct
 router.get("/searchedProducts", products_controller_1.productController.getSearchedProducts);
 router.patch("/:productId/reviews", products_controller_1.productController.addReview);
 router.patch("/:productId/quantity", products_controller_1.productController.decreaseQuantity);
+router.patch("/flash", products_controller_1.productController.updateFlashSale);
 exports.productRoutes = router;

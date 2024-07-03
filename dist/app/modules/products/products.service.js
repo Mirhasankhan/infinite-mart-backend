@@ -28,8 +28,10 @@ const getProductsBySearch = (search) => __awaiter(void 0, void 0, void 0, functi
     const result = yield products_model_1.productModel.find(query);
     return result;
 });
-const getSingleProductFromDB = (_id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield products_model_1.productModel.findOne({ _id });
+const updateProductFlashSale = (_id, discountPercentage) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield products_model_1.productModel.findByIdAndUpdate(_id, {
+        $set: { flashSale: true, discountPercentage: discountPercentage },
+    }, { new: true });
     return result;
 });
 const deleteProductFromDb = (_id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -66,4 +68,5 @@ exports.productDB = {
     decreaseProductQuantity,
     updateProductOnSale,
     getProductsBySearch,
+    updateProductFlashSale,
 };

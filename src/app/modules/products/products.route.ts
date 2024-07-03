@@ -8,5 +8,6 @@ router.get("/allProducts", productController.getAllProducts);
 router.get("/searchedProducts", productController.getSearchedProducts);
 router.patch("/:productId/reviews", productController.addReview);
 router.patch("/:productId/quantity", productController.decreaseQuantity);
+router.patch("/flash", productController.updateFlashSale);
 
 export const productRoutes = router;
