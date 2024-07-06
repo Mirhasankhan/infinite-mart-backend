@@ -13,5 +13,5 @@ export type TUser = {
   isSeller: boolean;
   phone?: string;
   image?: Image;
-  address: Address[];
+  address: Address;
 };

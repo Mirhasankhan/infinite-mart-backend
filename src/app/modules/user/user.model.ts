@@ -2,9 +2,9 @@ import { Schema, model } from "mongoose";
 import { TUser } from "./user.interface";
 
 const addressSchema = new Schema({
-  city: { type: String, required: true },
-  province: { type: String, required: true },
-  street: { type: String, required: true },
+  city: { type: String },
+  province: { type: String },
+  street: { type: String },
 });
 
 const userSchema = new Schema<TUser>({
@@ -16,7 +16,7 @@ const userSchema = new Schema<TUser>({
   image: {
     imageUrl: { type: String },
   },
-  address: { type: [addressSchema], default: [] },
+  address: { type: addressSchema, default: {} },
 });
 
 export const userModel = model<TUser>("user", userSchema);

@@ -137,6 +137,24 @@ const updateFlashSale = async (req: Request, res: Response) => {
   }
 };
 
+const getCategoryProduct = async (req: Request, res: Response) => {
+  try {
+    const category = req.query.category;
+    const result = await productDB.getCategoryProductFromDB(category as string);
+    res.status(200).json({
+      success: true,
+      message: "Products retrieved successfully",
+      data: result,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while retrieving products",
+    });
+  }
+};
+
 export const productController = {
   createProduct,
   getAllProducts,
@@ -144,4 +162,5 @@ export const productController = {
   decreaseQuantity,
   getSearchedProducts,
   updateFlashSale,
+  getCategoryProduct,
 };

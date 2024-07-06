@@ -86,6 +86,12 @@ const updateProductOnSale = async (_id: string, quantity: number) => {
   return result;
 };
 
+const getCategoryProductFromDB = async (category: string) => {
+  const query = category ? { category: category } : {};
+  const result = await productModel.find(query);
+  return result;
+};
+
 export const productDB = {
   createProductIntoDB,
   getAllProductsFromDB,
@@ -95,4 +101,5 @@ export const productDB = {
   updateProductOnSale,
   getProductsBySearch,
   updateProductFlashSale,
+  getCategoryProductFromDB,
 };

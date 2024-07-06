@@ -131,6 +131,24 @@ const updateFlashSale = (req, res) => __awaiter(void 0, void 0, void 0, function
         throw error;
     }
 });
+const getCategoryProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const category = req.query.category;
+        const result = yield products_service_1.productDB.getCategoryProductFromDB(category);
+        res.status(200).json({
+            success: true,
+            message: "Products retrieved successfully",
+            data: result,
+        });
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message: "An error occurred while retrieving products",
+        });
+    }
+});
 exports.productController = {
     createProduct,
     getAllProducts,
@@ -138,4 +156,5 @@ exports.productController = {
     decreaseQuantity,
     getSearchedProducts,
     updateFlashSale,
+    getCategoryProduct,
 };

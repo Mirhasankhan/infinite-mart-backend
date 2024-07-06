@@ -71,6 +71,23 @@ const getAllPurchase = async (req: Request, res: Response) => {
     });
   }
 };
+const getAllOrders = async (req: Request, res: Response) => {
+  try {
+    const email = req.query.email;
+    const result = await purchaseDB.getAllOrdersFromDB(email as string);
+    res.status(200).json({
+      success: true,
+      message: "orders retrieved successfully",
+      data: result,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while retrieving purchase",
+    });
+  }
+};
 
 const createPaymentIntent = async (req: Request, res: Response) => {
   try {
@@ -89,8 +106,36 @@ const createPaymentIntent = async (req: Request, res: Response) => {
   }
 };
 
+const updatePurchaseStatus = async (req: Request, res: Response) => {
+  try {
+    const { _id } = req.params;
+    const result = await purchaseDB.updatePurchaseStatus(_id);
+
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        message: "Purchase not found or already delivered",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Purchase status updated successfully",
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while updating purchase status",
+      error: err.message,
+    });
+  }
+};
+
 export const purchaseController = {
   purchaseProduct,
   getAllPurchase,
   createPaymentIntent,
+  getAllOrders,
+  updatePurchaseStatus,
 };

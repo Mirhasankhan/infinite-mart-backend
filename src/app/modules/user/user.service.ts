@@ -26,9 +26,9 @@ const updateUserFromDB = async (_id: string, updateData: any) => {
     _id,
     {
       $set: {
-        "address.0.city": city,
-        "address.0.province": province,
-        "address.0.street": street,
+        "address.city": city,
+        "address.province": province,
+        "address.street": street,
         phone: phone,
         image: image,
       },

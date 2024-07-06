@@ -60,6 +60,11 @@ const updateProductOnSale = (_id, quantity) => __awaiter(void 0, void 0, void 0,
     const result = yield products_model_1.productModel.findByIdAndUpdate(_id, { $inc: { quantity: -quantity, sold: quantity } }, { new: true });
     return result;
 });
+const getCategoryProductFromDB = (category) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = category ? { category: category } : {};
+    const result = yield products_model_1.productModel.find(query);
+    return result;
+});
 exports.productDB = {
     createProductIntoDB,
     getAllProductsFromDB,
@@ -69,4 +74,5 @@ exports.productDB = {
     updateProductOnSale,
     getProductsBySearch,
     updateProductFlashSale,
+    getCategoryProductFromDB,
 };

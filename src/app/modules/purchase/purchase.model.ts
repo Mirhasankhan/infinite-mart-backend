@@ -2,6 +2,13 @@
 import { Schema, model } from "mongoose";
 import { TPurchase } from "./purchase.interface";
 
+const addressSchema = new Schema({
+  phone: { type: String },
+  city: { type: String },
+  province: { type: String },
+  street: { type: String },
+});
+
 const purchaseSchema = new Schema<TPurchase>({
   productName: { type: String, required: true },
   email: { type: String, required: true },
@@ -17,6 +24,8 @@ const purchaseSchema = new Schema<TPurchase>({
   subCategory: { type: String, required: true },
   price: { type: Number, required: true },
   totalCost: { type: Number, required: true },
+  address: { type: addressSchema, required: true },
+  status: { type: String, default: "processing" },
   date: { type: String, required: true },
 });
 
