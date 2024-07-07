@@ -31,7 +31,8 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const email = req.query.email;
-        const result = yield products_service_1.productDB.getAllProductsFromDB(email);
+        const sortOption = req.query.sort;
+        const result = yield products_service_1.productDB.getAllProductsFromDB(email, sortOption);
         res.status(200).json({
             success: true,
             message: "Products retrieved successfully",

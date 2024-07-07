@@ -6,9 +6,15 @@ const createProductIntoDB = async (product: TProduct) => {
   return result;
 };
 
-const getAllProductsFromDB = async (email: string) => {
+const getAllProductsFromDB = async (email: string, sortOption: string) => {
   const query = email ? { email: email } : {};
-  const result = await productModel.find(query);
+  const sortCriteria =
+    sortOption === "highest"
+      ? { price: -1 }
+      : sortOption === "lowest"
+      ? { price: 1 }
+      : {};
+  const result = await productModel.find(query).sort(sortCriteria as string);
   return result;
 };
 

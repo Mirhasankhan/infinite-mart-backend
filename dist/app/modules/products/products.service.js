@@ -15,9 +15,14 @@ const createProductIntoDB = (product) => __awaiter(void 0, void 0, void 0, funct
     const result = yield products_model_1.productModel.create(product);
     return result;
 });
-const getAllProductsFromDB = (email) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllProductsFromDB = (email, sortOption) => __awaiter(void 0, void 0, void 0, function* () {
     const query = email ? { email: email } : {};
-    const result = yield products_model_1.productModel.find(query);
+    const sortCriteria = sortOption === "highest"
+        ? { price: -1 }
+        : sortOption === "lowest"
+            ? { price: 1 }
+            : {};
+    const result = yield products_model_1.productModel.find(query).sort(sortCriteria);
     return result;
 });
 const getProductsBySearch = (search) => __awaiter(void 0, void 0, void 0, function* () {

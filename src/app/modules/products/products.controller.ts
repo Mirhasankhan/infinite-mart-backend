@@ -22,7 +22,11 @@ const createProduct = async (req: Request, res: Response) => {
 const getAllProducts = async (req: Request, res: Response) => {
   try {
     const email = req.query.email;
-    const result = await productDB.getAllProductsFromDB(email as string);
+    const sortOption = req.query.sort;
+    const result = await productDB.getAllProductsFromDB(
+      email as string,
+      sortOption as string
+    );
     res.status(200).json({
       success: true,
       message: "Products retrieved successfully",
